@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Similarity Result</title>
+    <style>
+      :root {
+        --body-color: #0C134F;
+        --color-white: rgb(255, 255, 255);
+        --text-color-second:#D4ADFC;
+        --text-color-third:#A3D8FF;
+        --first-color: #5C469C;
+        --first-color-hover: #D4ADFC; 
+        --second-color: #1D267D;
+        --third-color: #D4ADFC;
+        --fourth-color: #FFE6E6;
+        --first-shadow-color: rgba(26, 26, 26, 0.1);
+      }
+
+      body {
+        background-color: var(--body-color);
+        color: var(--color-white);
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: auto;
+        animation: swipeUp 1.5s ease-in-out;
+      }
+
+      @keyframes swipeUp {
+        0% {
+          transform: translateY(100%);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      h1 {
+        margin-top: 50px;
+        text-align: center;
+        color: #5C469C;
+      }
+
+      p {
+        text-align: center;
+        font-size: 20px;
+        margin-bottom: 30px;
+        
+      }
+
+      .image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .image-container img {
+        margin: 0 10px;
+        width: 300px;
+        height: auto;
+      }
+
+      a {
+        text-align: center;
+        display: block;
+        margin-top: 50px;
+        color: var(--text-color-second);
+        text-decoration: none;
+        transition: color 0.3s ease;
+        background-color: #5C469C;
+        padding: 15px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 10px;
+      }
+
+      a:hover {
+        color: var(--text-color-third);
+      }
+      .loader {
+  --col1: rgba(142, 20, 255, 0.925);
+  --col2: rgb(39, 217, 211);
+  font-size: 50px;
+  font-weight: 600;
+  perspective: 800px;
+  position: relative;
+}
+
+.loader::after,
+.loader::before,
+.loader .text::after,
+.loader .text::before {
+  perspective: 800px;
+  animation: anim 2s ease-in-out infinite, dotMove 10s ease-out alternate infinite, move 10s linear infinite 1s;
+  ;
+  content: '●';
+  color: var(--col1);
+  position: absolute;
+  translate: -60px 500px;
+  width: 5px;
+  height: 5px;
+}
+
+.loader::before {
+  animation-delay: 3s;
+  color: var(--col1);
+}
+
+.loader .text::before {
+  color: var(--col2);
+  animation-delay: 2s;
+}
+
+.loader .text::after {
+  color: var(--col2);
+}
+
+.loader .text {
+  animation: anim 20s linear infinite, move 10s linear infinite 1s;
+  color: transparent;
+  background-image: linear-gradient(90deg, 
+  var(--col1) 0%,
+  var(--col2) 100%);
+  background-clip: text;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  transform: skew(5deg, -5deg);
+  -webkit-background-clip: text;
+  position: relative;
+  font-size: 50px;
+}
+
+@keyframes anim {
+  0%, 100% {
+    text-shadow: 2px 0px 2px rgba(179, 158, 158, .5);
+  }
+
+  50% {
+    background-size: 0%;
+    background-position-x: left;
+    text-shadow: 2px 10px 6px rgba(179, 158, 158, 1);
+  }
+}
+
+@keyframes move {
+  50% {
+    translate: 0px 0px;
+    rotate: x 60deg;
+    transform: skew(-5deg, 5deg);
+  }
+}
+
+@keyframes dotMove {
+  0%, 100% {
+    translate: -60px 300px;
+  }
+
+  50% {
+    translate: 160px -250px;
+    scale: .5;
+    opacity: .85;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="loader">
+        <p  class="text">
+          Image Similarity<br> Result
+        </p>
+      </div>
+    <!-- <h1>Image Similarity Result</h1> -->
+    <p style="color: #A3D8FF;">Similarity Score: {{ similarity_score }}</p>
+    <div class="image-container">
+        <img src="data:image/jpeg;base64,{{ image1 }}" alt="Image 1">
+        <img src="data:image/jpeg;base64,{{ image2 }}" alt="Image 2">
+    </div>
+    <a href="/">Back to Upload</a>
+</body>
+</html>
